@@ -213,7 +213,7 @@ abstract class JoseObject {
                   ? 'decrypt'
                   : 'unwrapKey')) {
         try {
-          var payload = getPayloadFor(key!, header, r);
+          var payload = getPayloadFor(key, header, r);
           if (payload != null) {
             return JosePayload(payload, _protectedHeaderFor(r));
           }
@@ -227,7 +227,7 @@ abstract class JoseObject {
 
   @protected
   List<int>? getPayloadFor(
-      JsonWebKey key, JoseHeader header, JoseRecipient recipient);
+      JsonWebKey? key, JoseHeader header, JoseRecipient recipient);
 
   JoseHeader _headerFor(JoseRecipient recipient) {
     return JoseHeader.fromJson(safeUnion([

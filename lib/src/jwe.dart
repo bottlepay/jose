@@ -122,8 +122,8 @@ class JsonWebEncryption extends JoseObject {
   }
 
   @override
-  List<int> getPayloadFor(
-      JsonWebKey key, JoseHeader header, JoseRecipient recipient) {
+  List<int>? getPayloadFor(
+      JsonWebKey? key, JoseHeader header, JoseRecipient recipient) {
     var aad = sharedProtectedHeader?.toBase64EncodedString() ?? '';
     if (additionalAuthenticatedData != null) {
       aad += '.${String.fromCharCodes(additionalAuthenticatedData!)}';
@@ -133,8 +133,8 @@ class JsonWebEncryption extends JoseObject {
     }
     var cek = header.algorithm == 'dir'
         ? key
-        : key.unwrapKey(recipient.data!, algorithm: header.algorithm);
-    return cek.decrypt(data!,
+        : key!.unwrapKey(recipient.data!, algorithm: header.algorithm);
+    return cek!.decrypt(data!,
         initializationVector: initializationVector,
         additionalAuthenticatedData: Uint8List.fromList(aad.codeUnits),
         authenticationTag: authenticationTag,

@@ -529,7 +529,6 @@ class DefaultJsonWebKeySetLoader extends JsonWebKeySetLoader {
     switch (uri.scheme) {
       case 'data':
         return uri.data!.contentAsString();
-        break;
       case 'https':
       case 'http':
         var r = await _httpClient.get(uri);
